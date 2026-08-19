@@ -253,6 +253,18 @@ export default function Contact({ param }: { param: string }) {
                   </ul>
                 </div>
               </Reveal>
+              <Reveal delay={280}>
+                <div className="mt-6 border border-gold-500/35 bg-mist p-6">
+                  <p className="flex items-center gap-2.5 text-[12px] font-bold uppercase tracking-wider text-gold-700">
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.8-1.4 8-4.5 8-9V6l-8-3Z" />
+                      <path d="m8.8 12 2.2 2.2 4.2-4.4" />
+                    </svg>
+                    {t.contact.legalTitle}
+                  </p>
+                  <p className="mt-2.5 text-[13px] leading-relaxed text-navy-800/70">{t.contact.legalText}</p>
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>
@@ -303,6 +315,43 @@ export default function Contact({ param }: { param: string }) {
               </div>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- offices ---------- */}
+      <section className="relative overflow-hidden bg-navy-950 py-20 text-paper md:py-24">
+        <div className="absolute inset-0 grid-lines" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-5 md:px-8">
+          <div className="max-w-2xl">
+            <Eyebrow dark>{t.contact.officesTitle}</Eyebrow>
+          </div>
+          <div className="mt-10 grid gap-px border border-paper/10 bg-paper/10 md:grid-cols-3">
+            {t.contact.offices.map((o, i) => (
+              <Reveal key={o.city} delay={i * 110} className="h-full">
+                <article className="group h-full bg-navy-950 p-8 transition-colors duration-500 hover:bg-navy-900">
+                  <div className="flex items-baseline justify-between">
+                    <span className="font-display text-4xl font-light text-gold-500/50 transition-colors duration-300 group-hover:text-gold-400">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <PinIcon className="h-5 w-5 text-navy-100/30 transition-colors duration-300 group-hover:text-gold-400" />
+                  </div>
+                  <h3 className="font-display mt-5 text-2xl font-semibold text-paper transition-colors duration-300 group-hover:text-gold-300">
+                    {o.city}
+                  </h3>
+                  <p className="mt-1.5 text-[11.5px] font-bold uppercase tracking-wider text-gold-400">{o.role}</p>
+                  <p className="mt-4 text-[14px] leading-relaxed text-navy-100/70">{o.addr}</p>
+                  <a
+                    href={`tel:${o.phone.replace(/\s/g, "")}`}
+                    dir="ltr"
+                    className="mt-5 inline-flex items-center gap-2 text-[14px] font-semibold text-navy-100/85 transition-colors hover:text-gold-300"
+                  >
+                    <PhoneIcon className="h-4 w-4 text-gold-500" />
+                    {o.phone}
+                  </a>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

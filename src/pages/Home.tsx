@@ -1,6 +1,7 @@
 import { href, useLang } from "../i18n";
 import { CountUp, MaskLines, Reveal } from "../components/Reveal";
 import SaudiMap from "../components/SaudiMap";
+import { ClientWall, SystemsStrip } from "../components/Trust";
 import {
   ArrowIcon,
   DiamondCheck,
@@ -155,6 +156,10 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* ================= COMPLIANCE + CLIENTS ================= */}
+      <SystemsStrip dark />
+      <ClientWall />
 
       {/* ================= SERVICES INDEX ================= */}
       <section className="relative bg-paper py-20 md:py-28">
@@ -328,6 +333,16 @@ export default function Home() {
                 <figcaption className="mt-7">
                   <p className="font-bold text-navy-900">{t.testimonial.author}</p>
                   <p className="mt-1 text-sm text-navy-800/60">{t.testimonial.company}</p>
+                </figcaption>
+              </figure>
+              <figure className="mt-12 border border-navy-800/12 bg-white p-7 shadow-[0_18px_50px_-30px_rgba(16,41,77,0.4)] transition-shadow duration-500 hover:shadow-[0_24px_60px_-28px_rgba(16,41,77,0.5)]">
+                <blockquote className="text-[15.5px] leading-relaxed text-navy-800/85">“{t.testimonial.quote2}”</blockquote>
+                <figcaption className="mt-5 flex items-center gap-3">
+                  <span className="h-9 w-px bg-gold-500" aria-hidden="true" />
+                  <span>
+                    <span className="block text-sm font-bold text-navy-900">{t.testimonial.author2}</span>
+                    <span className="block text-[12.5px] text-navy-800/55">{t.testimonial.company2}</span>
+                  </span>
                 </figcaption>
               </figure>
             </Reveal>

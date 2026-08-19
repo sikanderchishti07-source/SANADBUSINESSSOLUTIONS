@@ -105,6 +105,42 @@ export default function About() {
         </div>
       </section>
 
+      {/* ---------- journey timeline ---------- */}
+      <section className="relative bg-paper py-20 md:py-28">
+        <div className="absolute inset-0 grid-lines-light" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-5 md:px-8">
+          <div className="max-w-2xl">
+            <Eyebrow>{t.about.journeyEyebrow}</Eyebrow>
+            <h2 className="font-display mt-4 text-3xl font-semibold leading-tight text-navy-900 md:text-5xl">
+              <MaskLines lines={[t.about.journeyTitle]} />
+            </h2>
+          </div>
+          <div className="mt-12">
+            {t.about.journey.map((j, i) => (
+              <Reveal key={`${j.year}-${j.title}`} delay={i * 80}>
+                <div className="group grid gap-2 border-b border-navy-800/12 py-7 transition-colors duration-300 hover:bg-white md:grid-cols-[8rem_2.5rem_1fr] md:gap-6 md:px-4">
+                  <span className="font-display text-3xl font-bold text-gold-600 transition-colors duration-300 group-hover:text-gold-500 md:text-4xl" dir="ltr">
+                    {j.year}
+                  </span>
+                  <span className="relative hidden justify-center md:flex" aria-hidden="true">
+                    <span className="absolute top-2.5 h-3 w-3 rotate-45 border-2 border-gold-500 bg-paper transition-colors duration-300 group-hover:bg-gold-500" />
+                    {i < t.about.journey.length - 1 && (
+                      <span className="absolute -bottom-7 top-7 w-px bg-navy-800/15" />
+                    )}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-xl font-semibold text-navy-900 transition-colors duration-300 group-hover:text-gold-700 md:text-2xl">
+                      {j.title}
+                    </h3>
+                    <p className="mt-2 max-w-2xl text-[14.5px] leading-relaxed text-navy-800/70">{j.text}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ---------- why choose us ---------- */}
       <section className="relative bg-mist py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">

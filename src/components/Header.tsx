@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
 import { href, useHashRoute, useLang, type Route } from "../i18n";
-import { ArrowIcon, GlobeIcon } from "./Icons";
-import { GoldButton, Logo } from "./ui";
+import { ArrowIcon, ClockIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon } from "./Icons";
+import { EMAIL, GoldButton, Logo, PHONE_RAW, PHONE } from "./ui";
 
 export default function Header() {
   const { t, lang, toggle } = useLang();
   const { route } = useHashRoute();
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -39,6 +48,39 @@ export default function Header() {
             : "bg-transparent"
         }`}
       >
+        {/* corporate utility bar */}
+        <div
+          className={`hidden overflow-hidden border-b border-paper/10 bg-navy-950 text-navy-100/70 transition-all duration-500 md:block ${
+            scrolled ? "max-h-0 border-b-0" : "max-h-12"
+          }`}
+        >
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-2 text-[12px] font-medium">
+            <p className="flex items-center gap-2">
+              <PinIcon className="h-3.5 w-3.5 text-gold-500" />
+              {t.util.cities}
+              <span className="mx-2 hidden text-gold-500/50 lg:inline">|</span>
+              <span className="hidden items-center gap-2 lg:flex">
+                <ClockIcon className="h-3.5 w-3.5 text-gold-500" />
+                {t.util.hours}
+              </span>
+            </p>
+            <p className="flex items-center gap-5">
+              <a href={`tel:${PHONE_RAW}`} className="flex items-center gap-2 transition-colors hover:text-gold-300" dir="ltr">
+                <PhoneIcon className="h-3.5 w-3.5 text-gold-500" />
+                {PHONE}
+              </a>
+              <a href={`mailto:${EMAIL}`} className="hidden items-center gap-2 transition-colors hover:text-gold-300 lg:flex">
+                <MailIcon className="h-3.5 w-3.5 text-gold-500" />
+                {EMAIL}
+              </a>
+              <a href={href("contact")} className="hidden items-center gap-1.5 border-b border-gold-500/60 pb-0.5 font-bold text-gold-400 transition-colors hover:text-gold-300 xl:flex">
+                {t.util.requestQuote}
+                <ArrowIcon className="h-3 w-3" />
+              </a>
+            </p>
+          </div>
+        </div>
+
         {/* gold hairline */}
         <div className="h-0.5 bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600" aria-hidden="true" />
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8">
@@ -84,6 +126,14 @@ export default function Header() {
             </button>
           </div>
         </div>
+
+        {/* scroll progress */}
+        <div className="absolute inset-x-0 bottom-0 h-[2.5px] bg-paper/5" aria-hidden="true">
+          <div
+            className="h-full bg-gradient-to-r from-gold-600 via-gold-400 to-gold-300 transition-[width] duration-150 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
       </header>
 
       {/* mobile overlay */}
@@ -112,7 +162,7 @@ export default function Header() {
             className={`mt-8 text-sm text-navy-100/60 transition-all duration-500 ${open ? "opacity-100" : "opacity-0"}`}
             style={{ transitionDelay: open ? "420ms" : "0ms" }}
           >
-            {t.hero.eyebrow}
+            {t.util.cities} · {t.util.hours}
           </p>
         </nav>
       </div>
