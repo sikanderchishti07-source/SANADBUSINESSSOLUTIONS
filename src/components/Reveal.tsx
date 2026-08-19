@@ -39,13 +39,16 @@ interface RevealProps {
   children: ReactNode;
   delay?: number;
   className?: string;
+  /** entrance direction / style — defaults to fade-up */
+  variant?: "up" | "left" | "right" | "scale" | "blur";
 }
 
-export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
+export function Reveal({ children, delay = 0, className = "", variant = "up" }: RevealProps) {
   const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <div
       ref={ref}
+      data-v={variant === "up" ? undefined : variant}
       className={`reveal ${inView ? "is-in" : ""} ${className}`}
       style={{ ["--rv-delay" as string]: `${delay}ms` }}
     >

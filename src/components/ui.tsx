@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useLang } from "../i18n";
 import { MaskLines, Reveal } from "./Reveal";
+import { ScrollFade } from "./motion";
 import { ArrowIcon, BrandMark, WhatsAppIcon } from "./Icons";
 
 /* ---------- shared constants ---------- */
@@ -105,7 +106,7 @@ export function PageOpener({
       >
         سند
       </span>
-      <div className="relative mx-auto max-w-7xl px-5 md:px-8">
+      <ScrollFade className="relative mx-auto max-w-7xl px-5 md:px-8" distance={44} fadeTo={0.3}>
         <Eyebrow dark>{eyebrow}</Eyebrow>
         <h1 className="font-display mt-5 max-w-4xl text-4xl font-semibold leading-[1.08] md:text-6xl">
           <MaskLines lines={[title]} baseDelay={80} />
@@ -114,7 +115,7 @@ export function PageOpener({
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/85">{lede}</p>
         </Reveal>
         {children}
-      </div>
+      </ScrollFade>
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold-500/60 to-transparent" aria-hidden="true" />
     </section>
   );

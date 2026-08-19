@@ -83,7 +83,7 @@ export default function Contact({ param }: { param: string }) {
         <div className="relative mx-auto max-w-7xl px-5 md:px-8">
           <div className="grid gap-12 lg:grid-cols-12">
             {/* form */}
-            <Reveal className="lg:col-span-7">
+            <Reveal className="lg:col-span-7" variant="left">
               <div className="border border-navy-800/12 bg-white p-7 shadow-[0_24px_70px_-30px_rgba(16,41,77,0.3)] md:p-10">
                 {status === "sent" ? (
                   <div className="flex min-h-[26rem] flex-col items-center justify-center text-center">
@@ -194,7 +194,7 @@ export default function Contact({ param }: { param: string }) {
 
             {/* channels */}
             <div className="lg:col-span-5">
-              <Reveal delay={150}>
+              <Reveal delay={150} variant="right">
                 <div className="border border-navy-800/12 bg-navy-950 p-7 text-paper md:p-10">
                   <h3 className="font-display text-xl font-semibold text-gold-300">{t.contact.channelsTitle}</h3>
                   <ul className="mt-7 space-y-6">

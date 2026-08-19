@@ -4,6 +4,7 @@ import { prefersReducedMotion } from "./components/Reveal";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { WhatsAppFloat } from "./components/ui";
+import { BackToTop } from "./components/motion";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import About from "./pages/About";
@@ -53,6 +54,7 @@ function AppInner() {
 
       <Footer />
       <WhatsAppFloat />
+      <BackToTop />
     </div>
   );
 }

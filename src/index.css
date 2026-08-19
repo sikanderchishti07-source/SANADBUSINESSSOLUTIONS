@@ -97,6 +97,67 @@ body {
 .reveal.is-in {
   opacity: 1;
   transform: none;
+  filter: none;
+}
+
+/* directional reveal variants */
+.reveal[data-v="left"] {
+  transform: translateX(-42px);
+}
+.reveal[data-v="right"] {
+  transform: translateX(42px);
+}
+.reveal[data-v="scale"] {
+  transform: scale(0.88);
+}
+.reveal[data-v="blur"] {
+  transform: translateY(16px) scale(0.98);
+  filter: blur(9px);
+}
+[dir="rtl"] .reveal[data-v="left"] {
+  transform: translateX(42px);
+}
+[dir="rtl"] .reveal[data-v="right"] {
+  transform: translateX(-42px);
+}
+
+/* hero scroll cue */
+.scroll-cue-line {
+  position: relative;
+  width: 1px;
+  height: 52px;
+  overflow: hidden;
+  background: rgba(216, 223, 235, 0.18);
+}
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 0;
+  width: 1px;
+  height: 14px;
+  background: var(--color-gold-400);
+  animation: cue-drop 1.9s cubic-bezier(0.4, 0, 0.4, 1) infinite;
+}
+@keyframes cue-drop {
+  0% {
+    top: -14px;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    top: 56px;
+    opacity: 0;
+  }
+}
+
+/* gold rail that draws as you scroll (timeline) */
+.rail-draw {
+  transform-origin: top center;
+  transition: none;
+  will-change: transform;
 }
 
 /* ---------- line-mask headline reveal ---------- */
@@ -323,7 +384,12 @@ body {
   .reveal {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
+  }
+  .scroll-cue-line::after {
+    animation: none;
+    opacity: 0;
   }
   .mask-line > span {
     transform: none;

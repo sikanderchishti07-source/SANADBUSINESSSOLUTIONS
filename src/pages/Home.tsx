@@ -1,5 +1,6 @@
 import { href, useLang } from "../i18n";
 import { CountUp, MaskLines, Reveal } from "../components/Reveal";
+import { Parallax, ScrollFade, VelocityTilt } from "../components/motion";
 import SaudiMap from "../components/SaudiMap";
 import { ClientWall, SystemsStrip } from "../components/Trust";
 import {
@@ -33,7 +34,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-32 md:px-8 md:pt-44 lg:pb-24">
           <div className="grid items-center gap-14 lg:grid-cols-12">
             {/* copy */}
-            <div className="lg:col-span-6">
+            <ScrollFade className="lg:col-span-6">
               <Reveal>
                 <p className="flex items-center gap-3 text-[13px] font-semibold uppercase tracking-widest text-gold-400">
                   <span className="inline-block h-px w-8 bg-gold-400" />
@@ -79,10 +80,10 @@ export default function Home() {
                   ))}
                 </ul>
               </Reveal>
-            </div>
+            </ScrollFade>
 
             {/* map + live cards */}
-            <div className="relative lg:col-span-6">
+            <Parallax speed={0.06} className="relative lg:col-span-6">
               <Reveal delay={300}>
                 <div className="relative">
                   <SaudiMap className="mx-auto max-w-xl lg:max-w-none" />
@@ -122,8 +123,14 @@ export default function Home() {
                   </div>
                 </div>
               </Reveal>
-            </div>
+            </Parallax>
           </div>
+        </div>
+
+        {/* scroll cue */}
+        <div className="pointer-events-none absolute -top-[5.2rem] start-1/2 hidden -translate-x-1/2 flex-col items-center gap-2.5 lg:flex rtl:translate-x-1/2" aria-hidden="true">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-navy-100/45">{t.hero.scrollCue}</span>
+          <span className="scroll-cue-line" />
         </div>
 
         {/* ================= STATS STRIP ================= */}
@@ -143,6 +150,7 @@ export default function Home() {
 
       {/* ================= TICKER ================= */}
       <div className="overflow-hidden border-y-2 border-navy-950 bg-gold-500 py-3.5">
+        <VelocityTilt max={2.4} className="w-max">
         <div className="marquee-track">
           {[0, 1].map((dup) => (
             <div key={dup} className="flex shrink-0 items-center" aria-hidden={dup === 1}>
@@ -155,6 +163,7 @@ export default function Home() {
             </div>
           ))}
         </div>
+        </VelocityTilt>
       </div>
 
       {/* ================= COMPLIANCE + CLIENTS ================= */}
@@ -236,7 +245,7 @@ export default function Home() {
                 <h2 className="font-display mt-4 text-3xl font-semibold leading-tight md:text-5xl">
                   <MaskLines lines={[t.why.title]} />
                 </h2>
-                <Reveal delay={150}>
+                <Reveal delay={150} variant="left">
                   <p className="mt-6 max-w-md text-[15.5px] leading-relaxed text-navy-100/75">{t.why.lede}</p>
                 </Reveal>
                 <Reveal delay={250}>
@@ -264,7 +273,7 @@ export default function Home() {
             <div className="lg:col-span-7">
               <div className="border-t border-paper/10">
                 {t.why.points.map((p, i) => (
-                  <Reveal key={p.title} delay={i * 80}>
+                  <Reveal key={p.title} delay={i * 80} variant="right">
                     <article className="group grid grid-cols-[3.5rem_1fr] gap-5 border-b border-paper/10 py-7 transition-colors duration-500 hover:bg-navy-900/70 md:gap-8 md:px-5">
                       <span className="font-display text-3xl font-light text-gold-500/80 transition-transform duration-500 group-hover:-translate-y-1">
                         {String(i + 1).padStart(2, "0")}
@@ -322,7 +331,7 @@ export default function Home() {
         </span>
         <div className="relative mx-auto max-w-7xl px-5 md:px-8">
           <div className="grid gap-14 lg:grid-cols-12">
-            <Reveal className="lg:col-span-7">
+            <Reveal className="lg:col-span-7" variant="left">
               <figure className="relative border-s-4 border-gold-500 ps-7 md:ps-10">
                 <svg viewBox="0 0 24 24" className="absolute -start-1 -top-6 h-12 w-12 text-gold-500/30" fill="currentColor" aria-hidden="true">
                   <path d="M9.5 5C6 6.5 4 9.3 4 13v6h7v-7H7.5c0-2.5 1.2-4.4 3.5-5.5L9.5 5Zm10 0c-3.5 1.5-5.5 4.3-5.5 8v6h7v-7h-3.5c0-2.5 1.2-4.4 3.5-5.5L19.5 5Z" />
@@ -348,7 +357,7 @@ export default function Home() {
             </Reveal>
 
             <div className="lg:col-span-5">
-              <Reveal delay={150}>
+              <Reveal delay={150} variant="right">
                 <Eyebrow>{t.testimonial.sectorsTitle}</Eyebrow>
                 <ul className="mt-6 flex flex-wrap gap-2.5">
                   {t.sectors.map((s) => (

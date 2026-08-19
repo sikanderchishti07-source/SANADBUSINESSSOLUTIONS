@@ -22,6 +22,7 @@ const en = {
     cardAr: "Collections batch",
     cardArStatus: "collected this week",
     mapCaption: "Live coverage across the Kingdom",
+    scrollCue: "Scroll",
   },
   stats: [
     { value: 6, suffix: "", label: "Integrated service lines" },
@@ -404,6 +405,7 @@ const ar: typeof en = {
     cardAr: "دفعة تحصيل",
     cardArStatus: "تم تحصيلها هذا الأسبوع",
     mapCaption: "تغطية حيّة في أنحاء المملكة",
+    scrollCue: "مرّر للأسفل",
   },
   stats: [
     { value: 6, suffix: "", label: "خطوط خدمية متكاملة" },

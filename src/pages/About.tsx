@@ -2,9 +2,11 @@ import { useLang } from "../i18n";
 import { CountUp, MaskLines, Reveal } from "../components/Reveal";
 import { ArrowIcon, DiamondCheck } from "../components/Icons";
 import { CTABand, Eyebrow, GoldButton, PageOpener } from "../components/ui";
+import { useScrollProgress } from "../components/motion";
 
 export default function About() {
   const { t } = useLang();
+  const { ref: railRef, progress } = useScrollProgress<HTMLDivElement>();
 
   return (
     <>
@@ -115,7 +117,14 @@ export default function About() {
               <MaskLines lines={[t.about.journeyTitle]} />
             </h2>
           </div>
-          <div className="mt-12">
+          <div ref={railRef} className="relative mt-12">
+            {/* gold rail that draws as you scroll */}
+            <div className="absolute bottom-0 top-0 hidden w-px bg-navy-800/10 md:block ltr:left-[9.25rem] rtl:right-[9.25rem]" aria-hidden="true">
+              <div
+                className="rail-draw h-full w-full bg-gradient-to-b from-gold-600 via-gold-500 to-gold-300"
+                style={{ transform: `scaleY(${progress})` }}
+              />
+            </div>
             {t.about.journey.map((j, i) => (
               <Reveal key={`${j.year}-${j.title}`} delay={i * 80}>
                 <div className="group grid gap-2 border-b border-navy-800/12 py-7 transition-colors duration-300 hover:bg-white md:grid-cols-[8rem_2.5rem_1fr] md:gap-6 md:px-4">
